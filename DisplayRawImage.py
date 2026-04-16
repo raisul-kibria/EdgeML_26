@@ -33,7 +33,9 @@ def read_image_from_hex_file(file_path, width, height, mode):
 
 
     # Rescale the values in [0,255] range
-    r = None
+    r = (r * 255) // 31
+
+    # Do the scaling for green and blue channels
     g = None
     b = None
 
@@ -48,8 +50,8 @@ def save_image(image, folder, filename):
     os.makedirs(folder, exist_ok=True)
     save_path = os.path.join(folder, filename)
 
-    # save the image in the path: folder/filename    
-    image = None
+    # saves the image in the path: folder/filename    
+    image = image.save(save_path)
 
     assert os.path.isfile(save_path)
     print(f"Image saved to: {save_path}")
